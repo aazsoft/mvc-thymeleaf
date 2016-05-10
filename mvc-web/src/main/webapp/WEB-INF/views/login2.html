@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:include="layout :: htmlhead" th:with="title='Login'"></head>
+
+<body>
+	<div th:replace="layout :: navbar">(navbar)</div>
+
+	<div class="container">
+		<h1 th:text="#{login.subtitle}">Login page</h1>
+		<p th:if="${loginError}" th:text="#{login.wrongEmailOrPassword}">Wrong Email or Password.</p>
+		<form th:action="@{/j_spring_security_check}" method="post">
+			<label for="j_username" th:text="#{login.email}">Email</label>: 
+			<input type="text" id="j_username" name="j_username" /> <br /> 
+			<label for="j_password" th:text="#{login.password}">Password</label>: 
+			<input type="password" id="j_password" name="j_password" /> <br /> <input type="submit" th:text="#{login.login}" />
+		</form>
+	</div>
+	<div th:include="layout :: footer" id="footer">(footer)</div>
+
+</body>
+</html>
