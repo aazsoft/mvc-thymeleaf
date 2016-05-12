@@ -7,8 +7,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
+import com.aazsoft.mvc.security.config.SecurityConfiguration;
 import com.aazsoft.mvc.web.config.MvcConfiguration;
-import com.aazsoft.mvc.web.config.SecurityConfiguration;
 
 @SpringBootApplication
 @Configuration

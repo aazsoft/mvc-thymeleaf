@@ -28,6 +28,7 @@
 		<module>/../mvc-service</module>
 		<module>/../mvc-dao</module>
 		<module>/../mvc-rest</module>
+		<module>/../mvc-security</module>
 	</modules>
 
 	<build>

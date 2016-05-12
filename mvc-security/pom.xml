@@ -7,9 +7,9 @@
 		<version>1.0</version>
 		<relativePath>../mvc-parent/pom.xml</relativePath>
 	</parent>
-	<artifactId>mvc-service</artifactId>
+	<artifactId>mvc-security</artifactId>
 	<version>1.0-SNAPSHOT</version>
-	<name>MVC Service Implementation</name>
+	<name>MVC Security Implementation</name>
 	
 	<dependencies>
 		<!-- Project dependencies -->
@@ -18,15 +18,19 @@
 			<artifactId>mvc-dao</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>com.aazsoft.mvc</groupId>
+			<artifactId>mvc-service</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
 		<!-- Spring dependencies -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		<!-- Logging -->
 		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-		</dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
 	</dependencies>
 </project>
