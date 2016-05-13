@@ -34,8 +34,7 @@
 									name="password" type="password" value="" />
 							</div>
 							<div class="checkbox">
-								<label for="remember-me" th:text="#{login.rememberme}">Remember me</label> 
-								<input type="checkbox" name="rememberMe" id="rememberMe" />
+								<label><input type="checkbox" name="rememberMe" id="rememberMe" /><span th:text="#{login.rememberme}">(Remember me)</span></label>
 							</div>
 							<input type="submit" class="btn btn-lg btn-success btn-block"
 								th:value="#{login.login}" />
