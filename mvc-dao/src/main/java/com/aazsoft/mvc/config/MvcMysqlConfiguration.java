@@ -11,6 +11,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -23,6 +24,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @EnableJpaRepositories(value = "com.aazsoft.mvc.dao", entityManagerFactoryRef = "mvcEntityManagerFactory", transactionManagerRef = "mvcTransactionManager")
 @EntityScan("com.aazsoft.mvc.dao.entity")
+@PropertySource("classpath:application-dao.properties")
 public class MvcMysqlConfiguration {
 
 	@Bean(name = "mvcDataSource")
