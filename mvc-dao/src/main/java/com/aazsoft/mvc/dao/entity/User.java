@@ -9,10 +9,15 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "user")
+@Table(name = "User")
+@NamedQueries(value = {
+		@NamedQuery(name = "User.findAll", query = "select u from User u"),
+		@NamedQuery(name = "User.findByEmail", query = "select u from User u where u.email= :email") })
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 3293806819349409124L;
