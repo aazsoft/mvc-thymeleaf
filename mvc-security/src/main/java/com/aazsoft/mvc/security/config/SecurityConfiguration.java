@@ -12,43 +12,33 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 @PropertySource("classpath:application-service.properties")
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private UserDetailsService userDetailsService;
+	@Autowired
+	private UserDetailsService userDetailsService;
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/", "/public/**", "/webjars/**", "/**").permitAll()
-                .antMatchers("/users/**").hasAuthority("ADMIN")
-                .anyRequest().fullyAuthenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .failureUrl("/login?error")
-                .usernameParameter("email")
-                .permitAll()
-                .and()
-                .logout()
-                .logoutUrl("/profile/logout")
-                .deleteCookies("rememberMe")
-                .logoutSuccessUrl("/")
-                .permitAll()
-                .and()
-                .rememberMe();
-    }
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.authorizeRequests()
+				.antMatchers("/", "/public/**", "/webjars/**", "/**").permitAll()
+				.antMatchers("/users/**").hasAuthority("ADMIN")
+				.anyRequest().fullyAuthenticated()
+				.and().formLogin().loginPage("/login").failureUrl("/login?error")
+				.usernameParameter("email").permitAll()
+				.and().logout().logoutUrl("/profile/logout")
+				.deleteCookies("rememberMe")
+				.logoutSuccessUrl("/").permitAll()
+				.and().rememberMe();
+	}
 
-    @Override
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .userDetailsService(userDetailsService)
-                .passwordEncoder(new BCryptPasswordEncoder());
-    }
+	@Override
+	public void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(userDetailsService)
+			.passwordEncoder(new BCryptPasswordEncoder());
+	}
 
 }

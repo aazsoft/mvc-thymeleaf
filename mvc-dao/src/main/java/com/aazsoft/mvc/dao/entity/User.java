@@ -17,7 +17,9 @@ import javax.persistence.Table;
 @Table(name = "User")
 @NamedQueries(value = {
 		@NamedQuery(name = "User.findAll", query = "select u from User u"),
-		@NamedQuery(name = "User.findByEmail", query = "select u from User u where u.email= :email") })
+		@NamedQuery(name = "User.findByEmail", query = "select u from User u where u.email= :email"),
+		@NamedQuery(name = "User.findAllSortByEmail", query = "select u from User u order by u.email"), 
+		@NamedQuery(name = "User.findById", query = "select u from User u where u.id= :id")})
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 3293806819349409124L;

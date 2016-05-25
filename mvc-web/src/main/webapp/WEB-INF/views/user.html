@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:include="layout :: htmlhead"></head>
+
+<body>
+	<div th:replace="layout :: navbar">(navbar)</div>
+
+	<div class="container">
+		<h1>User logged info:</h1>
+		Logged user: <span th:text="${user.email}">user</span>
+		<!-- <span sec:authentication="principal.user.email">user</span> -->
+		<br />Roles: <span th:text="${user.role}">roles</span>
+		<!-- <span sec:authentication="principal.user.role">roles</span> -->
+	</div>
+
+	<div th:include="layout :: footer" id="footer">(footer)</div>
+
+</body>
+</html>

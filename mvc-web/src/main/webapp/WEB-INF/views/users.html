@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:include="layout :: htmlhead"></head>
+
+<body>
+	<div th:replace="layout :: navbar">(navbar)</div>
+
+	<div class="container">
+		<table>
+			<thead>
+				<tr>
+					<th>E-mail</th>
+					<th>Role</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><a href="/user/${user.id}">${user.email}</a></td>
+					<td>${user.role}</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+
+	<div th:include="layout :: footer" id="footer">(footer)</div>
+
+</body>
+</html>

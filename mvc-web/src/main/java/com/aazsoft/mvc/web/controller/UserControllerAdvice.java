@@ -9,13 +9,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import com.aazsoft.mvc.security.model.CurrentUser;
 
 @ControllerAdvice
-public class CurrentUserControllerAdvice {
+public class UserControllerAdvice {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CurrentUserControllerAdvice.class);
+    private static final Logger LOG = LoggerFactory.getLogger(UserControllerAdvice.class);
 
     @ModelAttribute("currentUser")
     public CurrentUser getCurrentUser(Authentication authentication) {
-        return (authentication == null) ? null : (CurrentUser) authentication.getPrincipal();
+        CurrentUser currentUser = (authentication == null) ? null : (CurrentUser) authentication.getPrincipal();
+        LOG.debug("getting current user, user={}", currentUser);
+        return currentUser;
     }
 
 

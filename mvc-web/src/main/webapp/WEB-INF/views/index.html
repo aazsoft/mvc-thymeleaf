@@ -11,6 +11,15 @@
 			<h1>User logged info:</h1>
 			Logged user: <span sec:authentication="principal.user.email">user</span>
 			<br/>Roles: <span sec:authentication="principal.user.role">roles</span>
+			<p>
+				<a th:href="|/user/${currentUser.id}|">View myself</a>
+				<div sec:authorize="hasAuthority('ADMIN')">
+					<ul>
+						<li><a th:href="@{/user/create}">Create a new user</a></li>
+		        		<li><a th:href="@{/users}">View all users</a></li>
+	        		</ul>			
+				</div>
+			</p>
 		</div>
 		<div sec:authorize="isAnonymous()">
 			<h2>Please <a href="/login">Log in!</a></h2>

@@ -10,13 +10,14 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
-public class ExceptionHandlerControllerAdvice {
+public class ExceptionControllerAdvice {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(ExceptionHandlerControllerAdvice.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ExceptionControllerAdvice.class);
 
     @ExceptionHandler(NoSuchElementException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public String handleNoSuchElementException(NoSuchElementException e) {
+    	LOG.debug("error thrown, error={}", NoSuchElementException.class);
         return e.getMessage();
     }
 

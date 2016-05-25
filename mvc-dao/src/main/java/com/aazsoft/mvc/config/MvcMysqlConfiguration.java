@@ -22,7 +22,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(value = "com.aazsoft.mvc.dao", entityManagerFactoryRef = "mvcEntityManagerFactory", transactionManagerRef = "mvcTransactionManager")
+@EnableJpaRepositories(value = "com.aazsoft.mvc.dao", 
+	entityManagerFactoryRef = "mvcEntityManagerFactory", 
+	transactionManagerRef = "mvcTransactionManager")
 @EntityScan("com.aazsoft.mvc.dao.entity")
 @PropertySource("classpath:application-dao.properties")
 public class MvcMysqlConfiguration {
@@ -60,12 +62,10 @@ public class MvcMysqlConfiguration {
 
 	protected Properties additionalProperties() {
 		final Properties properties = new Properties();
-		properties.setProperty("hibernate.dialect",
-				"org.hibernate.dialect.MySQL5Dialect");
+		properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
 		properties.setProperty("hibernate.show_sql", "true");
 		properties.setProperty("hibernate.ddl-auto", "update");
-		properties.setProperty("hibernate.naming-strategy",
-				"org.hibernate.cfg.ImprovedNamingStrategy");
+		properties.setProperty("hibernate.naming-strategy", "org.hibernate.cfg.ImprovedNamingStrategy");
 		return properties;
 	}
 }
