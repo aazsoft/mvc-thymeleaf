@@ -93,3 +93,10 @@ function buildUserListTable(data) {
 	console.log(bodyHtml);
 	$("#tbUserListBody").html(bodyHtml);
 }
+
+function confirmDeletion() {
+	if (confirm("Are you sure to delete this?")) {
+		return true;
+	}
+	return false;
+}

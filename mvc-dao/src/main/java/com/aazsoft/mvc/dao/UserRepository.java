@@ -15,4 +15,6 @@ public interface UserRepository {
 
 	Optional<User> findOneById(long id);
 
+	void delete(Long id);
+
 }

@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -85,5 +86,13 @@ public class AdminController {
 		LOG.debug("Processing user search form={}, bindingResult={}", form, bindingResult);
 		model.put("users", userService.getAllUsers());
 		return new ModelAndView("searchUsers", model);
+	}
+	
+	@PreAuthorize("hasAuthority('ADMIN')")
+	@RequestMapping(value = "/user/delete/{id}", method = RequestMethod.GET)
+	public ModelAndView deleteUser(@PathVariable final Long id) {
+		LOG.debug("Deleting user id={}", id);
+		userService.deleteUser(id);
+		return new ModelAndView("users", "users", userService.getAllUsers());
 	}
 }

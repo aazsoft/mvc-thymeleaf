@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Import;
 @Configuration
 @ComponentScan(value = "com.aazsoft.mvc")
 @EnableAutoConfiguration
-@Import(value = { RestSecurityConfiguration.class })
+@Import(value = { RestSecurityConfiguration.class})
 public class RestApplication {
 
 	public static void main(String[] args) {

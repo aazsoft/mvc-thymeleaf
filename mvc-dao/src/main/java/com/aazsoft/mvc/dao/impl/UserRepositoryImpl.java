@@ -47,4 +47,9 @@ public class UserRepositoryImpl implements UserRepository {
 		return Optional.of(query.getSingleResult());
 	}
 
+	@Override
+	public void delete(Long id) {
+		em.remove(em.find(User.class, id));
+	}
+
 }

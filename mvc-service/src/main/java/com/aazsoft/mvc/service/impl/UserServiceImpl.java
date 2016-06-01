@@ -18,8 +18,7 @@ import com.aazsoft.mvc.service.form.UserCreateForm;
 @Transactional
 public class UserServiceImpl implements UserService {
 
-	private static final Logger LOGGER = LoggerFactory
-			.getLogger(UserServiceImpl.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 
 	@Autowired
 	private UserRepository userRepository;
@@ -52,6 +51,12 @@ public class UserServiceImpl implements UserService {
 		user.setRole(form.getRole());
 		user.setAge(form.getAge());
 		return userRepository.save(user);
+	}
+
+	@Override
+	public void deleteUser(Long id) {
+		LOGGER.debug("Deleting user with ID={}", id);
+		userRepository.delete(id);
 	}
 
 }
