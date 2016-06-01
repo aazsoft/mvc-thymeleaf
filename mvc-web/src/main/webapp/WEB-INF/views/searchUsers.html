@@ -33,10 +33,13 @@
 						type="number" min="1" max="200"/>
 				</div>
 				<input type="button" id="btnUserSearch" class="btn btn-lg btn-success btn-block" th:value="#{userSearchForm.button.search}" />
+				<input type="button" id="btnUserIndex" class="btn btn-lg btn-primary btn-block" th:value="#{userSearchForm.button.index}" />
+				<input type="button" id="btnUserElasticSearch" class="btn btn-lg btn-info btn-block" th:value="#{userSearchForm.button.essearch}" />
+				<input type="button" id="btnElasticSearchClearIndices" class="btn btn-lg btn-warning btn-block" th:value="#{userSearchForm.button.esClearIndices}" />
 				
 			</fieldset>
 		</form>
-		<h1 th:text="#{admin.users.list.title}">(Users list)</h1>
+		<h1 th:text="#{admin.users.list.title}" id="titleUserList">(Users list)</h1>
 		<table class="table table-hover">
 			<thead>
 				<tr>

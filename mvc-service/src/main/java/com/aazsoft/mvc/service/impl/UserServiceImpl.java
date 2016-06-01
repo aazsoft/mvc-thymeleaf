@@ -46,9 +46,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User create(UserCreateForm form) {
 		User user = new User();
+		user.setUsername(form.getUsername());
 		user.setEmail(form.getEmail());
 		user.setPasswordHash(form.getPasswordHash());
 		user.setRole(form.getRole());
+		user.setAge(form.getAge());
 		return userRepository.save(user);
 	}
 

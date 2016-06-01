@@ -26,6 +26,11 @@
 						name="email" type="email" autofocus="autofocus" required="required"/>
 				</div>
 				<div class="control-group">
+					<label class="control-label" for="username" th:text="#{userCreateForm.username.label}">(Username)</label>
+					<input class="form-control" id="username" th:placeholder="#{userCreateForm.username.placeholder}"
+						name="username" required="required"/>
+				</div>
+				<div class="control-group">
 					<label class="control-label" for="password" th:text="#{userCreateForm.password.label}">(Password)</label>
 					<input class="form-control" id="password" th:placeholder="#{userCreateForm.password.placeholder}"
 						name="password" type="password" required="required"/>

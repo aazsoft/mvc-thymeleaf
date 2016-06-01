@@ -31,5 +31,10 @@
 			<artifactId>mvc-service</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>com.aazsoft.mvc</groupId>
+			<artifactId>mvc-elasticsearch</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 </project>
