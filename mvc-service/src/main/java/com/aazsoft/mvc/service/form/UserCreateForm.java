@@ -1,4 +1,4 @@
-package com.aazsoft.mvc.service.dto;
+package com.aazsoft.mvc.service.form;
 
 import com.aazsoft.mvc.dao.entity.Role;
 

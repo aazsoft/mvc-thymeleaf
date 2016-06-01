@@ -29,6 +29,7 @@
 		<module>/../mvc-dao</module>
 		<module>/../mvc-rest</module>
 		<module>/../mvc-security</module>
+		<module>/../mvc-elasticsearch</module>
 	</modules>
 
 	<build>

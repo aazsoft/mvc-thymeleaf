@@ -1,5 +1,7 @@
 package com.aazsoft.mvc.web.controller;
 
+import java.util.Map;
+
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -16,7 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.aazsoft.mvc.service.UserService;
-import com.aazsoft.mvc.service.dto.UserCreateForm;
+import com.aazsoft.mvc.service.form.UserCreateForm;
+import com.aazsoft.mvc.service.form.UserSearchForm;
 
 @Controller
 public class AdminController {
@@ -30,13 +33,13 @@ public class AdminController {
 	@RequestMapping(value = "/user/create", method = RequestMethod.GET)
 	public ModelAndView getUserCreatePage() {
 		LOG.debug("Getting user create form");
-		return new ModelAndView("userCreation", "form", new UserCreateForm());
+		return new ModelAndView("userCreation", "userCreateForm", new UserCreateForm());
 	}
 
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/user/create", method = RequestMethod.POST)
 	public String handleUserCreateForm(
-			@Valid @ModelAttribute("form") UserCreateForm form,
+			@Valid @ModelAttribute("userCreateForm") UserCreateForm form,
 			BindingResult bindingResult) {
 		LOG.debug("Processing user create form={}, bindingResult={}", form, bindingResult);
 		if (bindingResult.hasErrors()) {
@@ -65,4 +68,22 @@ public class AdminController {
         LOG.debug("Getting users page");
         return new ModelAndView("users", "users", userService.getAllUsers());
     }
+	
+	@PreAuthorize("hasAuthority('ADMIN')")
+	@RequestMapping(value = "/user/search", method = RequestMethod.GET)
+	public ModelAndView initializeSearchPage(Map<String, Object> model) {
+		LOG.debug("Getting user search form");
+		model.put("userSearchForm", new UserSearchForm());
+		return new ModelAndView("searchUsers", model);
+	}
+	
+	@PreAuthorize("hasAuthority('ADMIN')")
+	@RequestMapping(value = "/user/search", method = RequestMethod.POST)
+	public ModelAndView handleSearchPage(
+			@Valid @ModelAttribute("userSearchForm") UserSearchForm form,
+			BindingResult bindingResult, Map<String, Object> model) {
+		LOG.debug("Processing user search form={}, bindingResult={}", form, bindingResult);
+		model.put("users", userService.getAllUsers());
+		return new ModelAndView("searchUsers", model);
+	}
 }

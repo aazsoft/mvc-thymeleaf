@@ -1,19 +1,21 @@
 package com.aazsoft.mvc.service.impl;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.aazsoft.mvc.dao.UserRepository;
 import com.aazsoft.mvc.dao.entity.User;
 import com.aazsoft.mvc.service.UserService;
-import com.aazsoft.mvc.service.dto.UserCreateForm;
+import com.aazsoft.mvc.service.form.UserCreateForm;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
 	private static final Logger LOGGER = LoggerFactory
@@ -36,7 +38,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Collection<User> getAllUsers() {
+	public List<User> getAllUsers() {
 		LOGGER.debug("Getting all users");
 		return userRepository.findAllSortByEmail();
 	}

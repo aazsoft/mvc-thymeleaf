@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:include="layout :: htmlhead"></head>
+
+<body>
+	<div th:replace="layout :: navbar">(navbar)</div>
+
+	<div class="container">
+		<h1>Elastic Search</h1>
+		<form action="#" id="userSearchForm" method="post" class="form-horizontal">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+			<fieldset>
+				<div class="control-group">
+					<label class="control-label" for="username" th:text="#{userSearchForm.username.label}">(User name)</label>
+					<input class="form-control" id="username" th:placeholder="#{userSearchForm.username.placeholder}" 
+						name="username" autofocus="autofocus"/>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="email" th:text="#{userSearchForm.email.label}">(Email)</label>
+					<input class="form-control" id="email" type="email" th:placeholder="#{userSearchForm.email.placeholder}" name="email" />
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="role" th:text="#{userSearchForm.role.label}">(Role)</label> 
+					<select class="form-control" name="role" id="role" required="required">
+						<option>USER</option>
+						<option>ADMIN</option>
+					</select>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="age" th:text="#{userSearchForm.age.label}">(Age)</label>
+					<input class="form-control" id="age" th:placeholder="#{userSearchForm.age.placeholder}" name="age" 
+						type="number" min="1" max="200"/>
+				</div>
+				<input type="button" id="btnUserSearch" class="btn btn-lg btn-success btn-block" th:value="#{userSearchForm.button.search}" />
+				
+			</fieldset>
+		</form>
+		<h1 th:text="#{admin.users.list.title}">(Users list)</h1>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Username</th>
+					<th>E-mail</th>
+					<th>Role</th>
+					<th>Age</th>
+				</tr>
+			</thead>
+			<tbody id="tbUserListBody"></tbody>
+		</table>
+
+	</div>
+
+	<div th:include="layout :: footer" id="footer">(footer)</div>
+
+</body>
+</html>

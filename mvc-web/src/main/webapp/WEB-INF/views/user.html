@@ -9,8 +9,10 @@
 	<div class="container">
 		<h1>User logged info:</h1>
 		Logged user: <span th:text="${user.email}">user</span>
+		<br />Username: <span th:text="${user.username}">(Username)</span>
 		<!-- <span sec:authentication="principal.user.email">user</span> -->
-		<br />Roles: <span th:text="${user.role}">roles</span>
+		<br />Role: <span th:text="${user.role}">roles</span>
+		<br />Age: <span th:text="${user.age}">(Age)</span>
 		<!-- <span sec:authentication="principal.user.role">roles</span> -->
 	</div>
 

@@ -7,29 +7,26 @@
 		<version>1.0</version>
 		<relativePath>../mvc-parent/pom.xml</relativePath>
 	</parent>
-	<artifactId>mvc-rest</artifactId>
+	<artifactId>mvc-elasticsearch</artifactId>
 	<version>1.0-SNAPSHOT</version>
-	<name>MVC Rest API Endpoint Application</name>
-
+	<name>MVC ElasticSearch API Implementation</name>
+	
 	<dependencies>
+		<!-- Project dependencies -->
+		<dependency>
+			<groupId>com.aazsoft.mvc</groupId>
+			<artifactId>mvc-dao</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
 		<!-- Spring dependencies -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-hateoas</artifactId>
+			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
+		<!-- Logging -->
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-        <!-- project dependencies -->
-        <dependency>
-			<groupId>com.aazsoft.mvc</groupId>
-			<artifactId>mvc-service</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
 		</dependency>
 	</dependencies>
 </project>

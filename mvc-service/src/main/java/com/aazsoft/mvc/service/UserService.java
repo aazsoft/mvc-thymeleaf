@@ -1,10 +1,10 @@
 package com.aazsoft.mvc.service;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 import com.aazsoft.mvc.dao.entity.User;
-import com.aazsoft.mvc.service.dto.UserCreateForm;
+import com.aazsoft.mvc.service.form.UserCreateForm;
 
 public interface UserService {
 
@@ -12,7 +12,7 @@ public interface UserService {
 
     Optional<User> getUserByEmail(String email);
 
-    Collection<User> getAllUsers();
+    List<User> getAllUsers();
 
     User create(UserCreateForm form);
 

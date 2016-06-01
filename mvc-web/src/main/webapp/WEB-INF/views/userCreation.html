@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:include="layout :: htmlhead"></head>
 
@@ -7,30 +8,43 @@
 	<div th:replace="layout :: navbar">(navbar)</div>
 
 	<div class="container">
-
-		<form role="form" name="form" action="" method="post">
+		<h1 th:text="#{admin.user.creation.title}">(User creation)</h1>
+		<div class="alert alert-danger" th:if="${param.error != null}"
+			th:text="#{login.wrongEmailOrPassword}">
+			(Wrong E-Mail or Password.)
+			<button type="button" class="close" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<form action="#" id="userCreateForm" th:action="@{/user/create}" method="post" class="form-horizontal">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-
-			<div>
-				<label for="email">Email address</label> <input type="email"
-					name="email" id="email" value="${form.email}" required="required" autofocus="autofocus" />
-			</div>
-			<div>
-				<label for="password">Password</label> <input type="password"
-					name="password" id="password" required="required" />
-			</div>
-			<div>
-				<label for="passwordRepeated">Repeat</label> <input type="password"
-					name="passwordRepeated" id="passwordRepeated" required="required" />
-			</div>
-			<div>
-				<label for="role">Role</label> 
-				<select name="role" id="role" required="required">
-					<option>USER</option>
-					<option>ADMIN</option>
-				</select>
-			</div>
-			<button type="submit">Save</button>
+			<fieldset>
+				<div class="control-group">
+					<label class="control-label" for="email" th:text="#{userCreateForm.email.label}">(Email address)</label>
+					<input class="form-control" id="email" th:placeholder="#{userCreateForm.email.placeholder}"
+						name="email" type="email" autofocus="autofocus" required="required"/>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="password" th:text="#{userCreateForm.password.label}">(Password)</label>
+					<input class="form-control" id="password" th:placeholder="#{userCreateForm.password.placeholder}"
+						name="password" type="password" required="required"/>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="passwordRepeated" th:text="#{userCreateForm.password.repeat.label}">(Repeat password)</label>
+					<input class="form-control" id="passwordRepeated" th:placeholder="#{userCreateForm.password.repeat.placeholder}"
+						name="passwordRepeated" type="password" required="required"/>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="role" th:text="#{userCreateForm.role.label}">(Role)</label> 
+					<select class="form-control" name="role" id="role" required="required">
+						<option>USER</option>
+						<option>ADMIN</option>
+					</select>
+				</div>
+				<input type="submit" class="btn btn-lg btn-success btn-block" th:value="#{userCreateForm.button.save}" />
+				
+			</fieldset>
 		</form>
 		
 	</div>

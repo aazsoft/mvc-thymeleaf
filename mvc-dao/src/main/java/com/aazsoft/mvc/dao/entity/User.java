@@ -18,8 +18,8 @@ import javax.persistence.Table;
 @NamedQueries(value = {
 		@NamedQuery(name = "User.findAll", query = "select u from User u"),
 		@NamedQuery(name = "User.findByEmail", query = "select u from User u where u.email= :email"),
-		@NamedQuery(name = "User.findAllSortByEmail", query = "select u from User u order by u.email"), 
-		@NamedQuery(name = "User.findById", query = "select u from User u where u.id= :id")})
+		@NamedQuery(name = "User.findAllSortByEmail", query = "select u from User u order by u.email"),
+		@NamedQuery(name = "User.findById", query = "select u from User u where u.id= :id") })
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 3293806819349409124L;
@@ -38,6 +38,12 @@ public class User implements Serializable {
 	@Column(name = "role", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Role role;
+
+	@Column(name = "age", nullable = false)
+	private int age;
+
+	@Column(name = "username", nullable = false, unique = true)
+	private String username;
 
 	public Long getId() {
 		return id;
@@ -73,4 +79,25 @@ public class User implements Serializable {
 				+ email.replaceFirst("@.*", "@***") + ", passwordHash='"
 				+ passwordHash.substring(0, 10) + ", role=" + role + '}';
 	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 }
