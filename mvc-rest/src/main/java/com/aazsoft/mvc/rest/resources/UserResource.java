@@ -5,7 +5,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.ResourceSupport;
 
-import com.aazsoft.mvc.dao.entity.User;
+import com.aazsoft.mvc.domain.entity.User;
 import com.aazsoft.mvc.rest.controller.UserRestController;
 
 public class UserResource extends ResourceSupport {

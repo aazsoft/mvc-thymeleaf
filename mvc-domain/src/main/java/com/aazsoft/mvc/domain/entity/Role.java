@@ -1,4 +1,4 @@
-package com.aazsoft.mvc.dao.entity;
+package com.aazsoft.mvc.domain.entity;
 
 public enum Role {
 

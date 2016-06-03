@@ -1,19 +1,22 @@
 package com.aazsoft.mvc.rest.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.aazsoft.mvc.dao.entity.User;
-import com.aazsoft.mvc.elasticsearch.docs.UserDocument;
+import com.aazsoft.mvc.domain.entity.User;
+import com.aazsoft.mvc.domain.forms.UserSearchForm;
 import com.aazsoft.mvc.elasticsearch.service.UserIndexService;
 import com.aazsoft.mvc.elasticsearch.service.UserSearchService;
 import com.aazsoft.mvc.service.UserService;
@@ -36,7 +39,7 @@ public class UserRestController {
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	public List<User> searchUser() {
 		LOG.debug("Searching user...");
-		return new ArrayList<User>(userService.getAllUsers());
+		return userService.getAllUsers();
 	}
 	
 //	@RequestMapping(value = "/search", method = RequestMethod.POST)
@@ -50,7 +53,8 @@ public class UserRestController {
 //		return new Resources<UserResource>(userResourceList);
 //	}
 	
-	@RequestMapping(value = "/elasticsearch/index", method = RequestMethod.POST, produces="application/json")
+	@RequestMapping(value = "/elasticsearch/index", 
+			method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
 	public String esIndexAllUsers() {
 		List<User> users = userService.getAllUsers();
 		if (CollectionUtils.isEmpty(users)) {
@@ -61,13 +65,14 @@ public class UserRestController {
 	}
 	
 	@RequestMapping(value = "/elasticsearch/searchByEmail/{email:.+}", method = RequestMethod.POST)
-	public List<UserDocument> esSearchUserByEmail(final @PathVariable String email) {
+	public List<User> esSearchUserByEmail(final @PathVariable String email) {
 		LOG.debug("Search users by Email={}", email);
-		List<UserDocument> users = esSearchService.searchAllUsersByEmail(email);
+		List<User> users = esSearchService.searchAllUsersByEmail(email);
 		return users;
 	}
 	
-	@RequestMapping(value = "/elasticsearch/clearIndices", method = RequestMethod.POST, produces="application/json")
+	@RequestMapping(value = "/elasticsearch/clearIndices",
+			method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public String esClearAllIndices() {
 		try {
 			esIndexService.clearAllIndices();
@@ -77,4 +82,11 @@ public class UserRestController {
 		return "{\"message\": \"Clearing All Indices on Elastic Search successfully!\"}";
 	}
 
+	@RequestMapping(value = "/elasticsearch/searchUsers", 
+			method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public Page<User> esSearchUsers(@RequestBody final UserSearchForm userSearchForm) {
+		LOG.debug("Search users by userSearchForm={}", userSearchForm);
+		Page<User> users = esSearchService.searchUsers(userSearchForm, new PageRequest(0, 10));
+		return users;
+	}
 }

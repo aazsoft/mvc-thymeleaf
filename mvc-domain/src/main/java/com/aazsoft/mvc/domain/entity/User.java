@@ -1,4 +1,4 @@
-package com.aazsoft.mvc.dao.entity;
+package com.aazsoft.mvc.domain.entity;
 
 import java.io.Serializable;
 
@@ -13,6 +13,10 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import lombok.Data;
+
+import org.springframework.data.elasticsearch.annotations.Document;
+
 @Entity
 @Table(name = "User")
 @NamedQueries(value = {
@@ -20,6 +24,8 @@ import javax.persistence.Table;
 		@NamedQuery(name = "User.findByEmail", query = "select u from User u where u.email= :email"),
 		@NamedQuery(name = "User.findAllSortByEmail", query = "select u from User u order by u.email"),
 		@NamedQuery(name = "User.findById", query = "select u from User u where u.id= :id") })
+@Document(indexName = "user", type = "User", shards = 1, replicas = 0, refreshInterval = "-1")
+@Data
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 3293806819349409124L;
@@ -44,60 +50,5 @@ public class User implements Serializable {
 
 	@Column(name = "username", nullable = false, unique = true)
 	private String username;
-
-	public Long getId() {
-		return id;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPasswordHash() {
-		return passwordHash;
-	}
-
-	public void setPasswordHash(String passwordHash) {
-		this.passwordHash = passwordHash;
-	}
-
-	public Role getRole() {
-		return role;
-	}
-
-	public void setRole(Role role) {
-		this.role = role;
-	}
-
-	@Override
-	public String toString() {
-		return "User{" + "id=" + id + ", email='"
-				+ email.replaceFirst("@.*", "@***") + ", passwordHash='"
-				+ passwordHash.substring(0, 10) + ", role=" + role + '}';
-	}
-
-	public int getAge() {
-		return age;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 }

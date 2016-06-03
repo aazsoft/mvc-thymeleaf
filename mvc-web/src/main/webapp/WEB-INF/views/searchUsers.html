@@ -23,8 +23,9 @@
 				<div class="control-group">
 					<label class="control-label" for="role" th:text="#{userSearchForm.role.label}">(Role)</label> 
 					<select class="form-control" name="role" id="role" required="required">
-						<option>USER</option>
-						<option>ADMIN</option>
+						<option value="">All roles</option>
+						<option value="USER">USER</option>
+						<option value="ADMIN">ADMIN</option>
 					</select>
 				</div>
 				<div class="control-group">

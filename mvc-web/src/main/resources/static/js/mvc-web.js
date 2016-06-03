@@ -42,15 +42,24 @@ $(document).ready(function() {
 	
 	$("#btnUserElasticSearch").click(function (event) {
 		console.log("Searching Users by Email using Elastic Search...");
-		var email = $("#userSearchForm input[id=email]").val();
-		console.log("email=" + email);
+		var userSearchForm = {};
+		userSearchForm["username"] = $("#userSearchForm input[id=username]").val();
+		userSearchForm["email"] = $("#userSearchForm input[id=email]").val();
+		userSearchForm["role"] = $("#userSearchForm select[id=role]").val();
+		userSearchForm["age"] = $("#userSearchForm input[id=age]").val();
+		console.log("userSearchForm=" + userSearchForm);
 		$.ajax({
+			headers: { 
+		        'Accept': 'application/json',
+		        'Content-Type': 'application/json' 
+		    },
 			type : 'POST',
-			url : 'http://localhost:9000/user/elasticsearch/searchByEmail/' + email,
+			url : 'http://localhost:9000/user/elasticsearch/searchUsers',
+			data: JSON.stringify(userSearchForm),
 			dataType : 'json',
 			success : function(data) {
 				$("#titleUserList").html("Users List from Elastic Search");
-				buildUserListTable(data);
+				buildUserListTable(data.content);
 			},
 			error: function (xhr, error) {
 				console.log(error);

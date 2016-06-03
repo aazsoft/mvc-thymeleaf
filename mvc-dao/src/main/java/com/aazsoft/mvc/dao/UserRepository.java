@@ -3,7 +3,7 @@ package com.aazsoft.mvc.dao;
 import java.util.List;
 import java.util.Optional;
 
-import com.aazsoft.mvc.dao.entity.User;
+import com.aazsoft.mvc.domain.entity.User;
 
 public interface UserRepository {
 

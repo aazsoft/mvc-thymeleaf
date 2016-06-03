@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
-import com.aazsoft.mvc.elasticsearch.docs.UserDocument;
+import com.aazsoft.mvc.domain.entity.User;
 
-public interface UserESRepository extends ElasticsearchRepository<UserDocument, Long> {
+public interface UserESRepository extends ElasticsearchRepository<User, Long> {
 
-	public List<UserDocument> findByEmail(final String email);
-
+	public List<User> findByEmail(final String email);
+	
 }

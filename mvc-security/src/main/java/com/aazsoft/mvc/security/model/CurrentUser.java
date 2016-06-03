@@ -2,8 +2,8 @@ package com.aazsoft.mvc.security.model;
 
 import org.springframework.security.core.authority.AuthorityUtils;
 
-import com.aazsoft.mvc.dao.entity.Role;
-import com.aazsoft.mvc.dao.entity.User;
+import com.aazsoft.mvc.domain.entity.Role;
+import com.aazsoft.mvc.domain.entity.User;
 
 public class CurrentUser extends
 		org.springframework.security.core.userdetails.User {

@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.aazsoft.mvc.dao.entity.Role;
+import com.aazsoft.mvc.domain.entity.Role;
 import com.aazsoft.mvc.security.model.CurrentUser;
 
 @Service

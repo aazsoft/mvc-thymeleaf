@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.aazsoft.mvc.dao.UserRepository;
-import com.aazsoft.mvc.dao.entity.User;
+import com.aazsoft.mvc.domain.entity.User;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {

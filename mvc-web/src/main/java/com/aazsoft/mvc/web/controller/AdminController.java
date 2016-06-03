@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.aazsoft.mvc.domain.forms.UserCreateForm;
+import com.aazsoft.mvc.domain.forms.UserSearchForm;
 import com.aazsoft.mvc.service.UserService;
-import com.aazsoft.mvc.service.form.UserCreateForm;
-import com.aazsoft.mvc.service.form.UserSearchForm;
 
 @Controller
 public class AdminController {

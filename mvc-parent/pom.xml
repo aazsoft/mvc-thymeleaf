@@ -30,6 +30,7 @@
 		<module>/../mvc-rest</module>
 		<module>/../mvc-security</module>
 		<module>/../mvc-elasticsearch</module>
+		<module>/../mvc-domain</module>
 	</modules>
 
 	<build>

@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aazsoft.mvc.dao.UserRepository;
-import com.aazsoft.mvc.dao.entity.User;
+import com.aazsoft.mvc.domain.entity.User;
+import com.aazsoft.mvc.domain.forms.UserCreateForm;
 import com.aazsoft.mvc.service.UserService;
-import com.aazsoft.mvc.service.form.UserCreateForm;
 
 @Service
 @Transactional

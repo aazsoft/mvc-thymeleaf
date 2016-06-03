@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aazsoft.mvc.dao.entity.User;
+import com.aazsoft.mvc.domain.entity.User;
 import com.aazsoft.mvc.security.model.CurrentUser;
 import com.aazsoft.mvc.service.UserService;
 
