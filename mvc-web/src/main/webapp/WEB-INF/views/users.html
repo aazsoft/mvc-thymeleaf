@@ -25,7 +25,7 @@
 							<td th:text="${user.id}">(ID)</td>
 							<td th:text="${user.username}">(Username)</td>
 							<td><a th:href="@{/user/{id}(id=${user.id})}" th:text="${user.email}">email</a></td>
-							<td th:text="${user.role}">roles</td>
+							<td th:text="${user.rolesStr}">roles</td>
 							<td th:text="${user.age}">(Age)</td>
 							<td><a th:href="@{/user/delete/{id}(id=${user.id})}" class="btn btn-danger btn-block" onclick="javascript:return confirmDeletion();">Delete</a></td>
 						</tr>

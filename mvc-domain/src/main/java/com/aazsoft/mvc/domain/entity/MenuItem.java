@@ -20,34 +20,32 @@ import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
 @Entity
-@Table(name = "role")
-@NamedQuery(name = "Role.findAll", query = "SELECT r FROM Role r")
+@Table(name="menu_item")
+@NamedQuery(name="MenuItem.findAll", query="SELECT m FROM MenuItem m")
 @Data
-@Document(indexName = "role", type = "Role", shards = 1, replicas = 0, refreshInterval = "-1")
-@ToString(of = { "id", "roleName", "roleDescription" })
-public class Role implements Serializable {
+@Document(indexName = "menuItem", type = "MenuItem", shards = 1, replicas = 0, refreshInterval = "-1")
+@ToString(of = { "id", "miDesc", "miName", "miParentId" })
+public class MenuItem implements Serializable {
 
-	private static final long serialVersionUID = -7683680631875730954L;
+	private static final long serialVersionUID = 6877472413176489513L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false, updatable = false)
 	private int id;
 
-	@Column(name = "role_description")
-	private String roleDescription;
+	@Column(name="mi_desc")
+	private String miDesc;
 
-	@Column(name = "role_name")
-	private String roleName;
+	@Column(name="mi_name")
+	private String miName;
 
-	// bi-directional many-to-one association to Permission
-	@OneToMany(mappedBy = "role")
+	@Column(name="mi_parent_id")
+	private int miParentId;
+
+	//bi-directional many-to-one association to Permission
+	@OneToMany(mappedBy="menuItem")
 	@Field( type = FieldType.Nested)
 	private List<Permission> permissions;
-
-	// bi-directional many-to-one association to UserRole
-	@OneToMany(mappedBy = "role")
-	@Field( type = FieldType.Nested)
-	private List<UserRole> userRoles;
 
 }

@@ -1,15 +1,14 @@
 package com.aazsoft.mvc.domain.entity;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -20,34 +19,34 @@ import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
 @Entity
-@Table(name = "role")
-@NamedQuery(name = "Role.findAll", query = "SELECT r FROM Role r")
+@Table(name = "permission")
+@NamedQuery(name = "Permission.findAll", query = "SELECT p FROM Permission p")
 @Data
-@Document(indexName = "role", type = "Role", shards = 1, replicas = 0, refreshInterval = "-1")
-@ToString(of = { "id", "roleName", "roleDescription" })
-public class Role implements Serializable {
+@Document(indexName = "permission", type = "Permission", shards = 1, replicas = 0, refreshInterval = "-1")
+@ToString(of = { "id", "permissionDesc", "permissionName" })
+public class Permission implements Serializable {
 
-	private static final long serialVersionUID = -7683680631875730954L;
+	private static final long serialVersionUID = 9082102944331427212L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false, updatable = false)
 	private int id;
 
-	@Column(name = "role_description")
-	private String roleDescription;
+	@Column(name = "permission_desc")
+	private String permissionDesc;
 
-	@Column(name = "role_name")
-	private String roleName;
+	@Column(name = "permission_name")
+	private String permissionName;
 
-	// bi-directional many-to-one association to Permission
-	@OneToMany(mappedBy = "role")
+	// bi-directional many-to-one association to Role
+	@ManyToOne
 	@Field( type = FieldType.Nested)
-	private List<Permission> permissions;
+	private Role role;
 
-	// bi-directional many-to-one association to UserRole
-	@OneToMany(mappedBy = "role")
+	// bi-directional many-to-one association to MenuItem
+	@ManyToOne
 	@Field( type = FieldType.Nested)
-	private List<UserRole> userRoles;
+	private MenuItem menuItem;
 
 }

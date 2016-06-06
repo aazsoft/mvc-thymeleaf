@@ -1,15 +1,14 @@
 package com.aazsoft.mvc.domain.entity;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -20,34 +19,28 @@ import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
 @Entity
-@Table(name = "role")
-@NamedQuery(name = "Role.findAll", query = "SELECT r FROM Role r")
+@Table(name = "user_role")
+@NamedQuery(name = "UserRole.findAll", query = "SELECT u FROM UserRole u")
 @Data
-@Document(indexName = "role", type = "Role", shards = 1, replicas = 0, refreshInterval = "-1")
-@ToString(of = { "id", "roleName", "roleDescription" })
-public class Role implements Serializable {
+@Document(indexName = "userRole", type = "UserRole", shards = 1, replicas = 0, refreshInterval = "-1")
+@ToString(of = { "id", "user", "role" })
+public class UserRole implements Serializable {
 
-	private static final long serialVersionUID = -7683680631875730954L;
+	private static final long serialVersionUID = -4416906955255115140L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false, updatable = false)
 	private int id;
 
-	@Column(name = "role_description")
-	private String roleDescription;
-
-	@Column(name = "role_name")
-	private String roleName;
-
-	// bi-directional many-to-one association to Permission
-	@OneToMany(mappedBy = "role")
+	// bi-directional many-to-one association to User
+	@ManyToOne
 	@Field( type = FieldType.Nested)
-	private List<Permission> permissions;
+	private User user;
 
-	// bi-directional many-to-one association to UserRole
-	@OneToMany(mappedBy = "role")
+	// bi-directional many-to-one association to Role
+	@ManyToOne
 	@Field( type = FieldType.Nested)
-	private List<UserRole> userRoles;
+	private Role role;
 
 }

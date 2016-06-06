@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.aazsoft.mvc.dao.UserRepository;
 import com.aazsoft.mvc.domain.entity.User;
+import com.aazsoft.mvc.domain.entity.UserRole;
 import com.aazsoft.mvc.domain.forms.UserCreateForm;
 import com.aazsoft.mvc.service.UserService;
 
@@ -48,9 +49,14 @@ public class UserServiceImpl implements UserService {
 		user.setUsername(form.getUsername());
 		user.setEmail(form.getEmail());
 		user.setPasswordHash(form.getPasswordHash());
-		user.setRole(form.getRole());
+		user.setUserRoles(buildUserRoles(form.getRoles()));
 		user.setAge(form.getAge());
 		return userRepository.save(user);
+	}
+
+	private List<UserRole> buildUserRoles(List<Integer> roles) {
+		// build user roles
+		return null;
 	}
 
 	@Override

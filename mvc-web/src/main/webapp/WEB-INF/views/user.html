@@ -10,10 +10,11 @@
 		<h1>User logged info:</h1>
 		Logged user: <span th:text="${user.email}">user</span>
 		<br />Username: <span th:text="${user.username}">(Username)</span>
-		<!-- <span sec:authentication="principal.user.email">user</span> -->
-		<br />Role: <span th:text="${user.role}">roles</span>
+		<br />Roles: 
+		<ul th:each="role :  ${user.userRoles}">
+			<li th:text="${role.role.roleName}">(role name)</li>
+		</ul>
 		<br />Age: <span th:text="${user.age}">(Age)</span>
-		<!-- <span sec:authentication="principal.user.role">roles</span> -->
 	</div>
 
 	<div th:include="layout :: footer" id="footer">(footer)</div>

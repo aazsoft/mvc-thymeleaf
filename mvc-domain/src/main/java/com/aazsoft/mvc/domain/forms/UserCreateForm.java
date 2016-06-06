@@ -1,8 +1,8 @@
 package com.aazsoft.mvc.domain.forms;
 
-import lombok.Data;
+import java.util.List;
 
-import com.aazsoft.mvc.domain.entity.Role;
+import lombok.Data;
 
 @Data
 public class UserCreateForm {
@@ -13,7 +13,7 @@ public class UserCreateForm {
 
 	private String passwordRepeated;
 
-	private Role role = Role.USER;
+	private List<Integer> roles;
 
 	private String passwordHash;
 

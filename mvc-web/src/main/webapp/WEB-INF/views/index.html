@@ -8,9 +8,7 @@
 
 	<div class="container">
 		<div sec:authorize="isAuthenticated()">
-			<h1>User logged info:</h1>
-			Logged user: <span sec:authentication="principal.user.email">user</span>
-			<br/>Roles: <span sec:authentication="principal.user.role">roles</span>
+			<h1>Home page</h1>
 			<p>
 				<a th:href="@{/user/{id}(id=${currentUser.id})}">View myself</a>
 				<div sec:authorize="hasAuthority('ADMIN')">
