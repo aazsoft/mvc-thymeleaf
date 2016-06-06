@@ -1,11 +1,12 @@
 package com.aazsoft.mvc.security.model;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.security.core.authority.AuthorityUtils;
 
+import com.aazsoft.mvc.domain.entity.Role;
 import com.aazsoft.mvc.domain.entity.User;
-import com.aazsoft.mvc.domain.entity.UserRole;
 
 public class CurrentUser extends
 		org.springframework.security.core.userdetails.User {
@@ -16,7 +17,8 @@ public class CurrentUser extends
 
 	public CurrentUser(User user) {
 		super(user.getEmail(), user.getPasswordHash(), 
-				AuthorityUtils.createAuthorityList(user.getRoles()));
+				AuthorityUtils.createAuthorityList(
+						user.getRoles().stream().map(r -> r.getRoleName()).collect(Collectors.toList()).toArray(new String[] {})));
 		this.user = user;
 	}
 
@@ -28,8 +30,8 @@ public class CurrentUser extends
 		return user.getId();
 	}
 
-	public List<UserRole> getRoles() {
-		return user.getUserRoles();
+	public List<Role> getRoles() {
+		return user.getRoles();
 	}
 
 	@Override

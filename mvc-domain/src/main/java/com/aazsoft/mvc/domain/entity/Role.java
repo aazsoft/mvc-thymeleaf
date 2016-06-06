@@ -8,23 +8,23 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
 import lombok.ToString;
 
 import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "role")
 @NamedQuery(name = "Role.findAll", query = "SELECT r FROM Role r")
 @Data
 @Document(indexName = "role", type = "Role", shards = 1, replicas = 0, refreshInterval = "-1")
-@ToString(of = { "id", "roleName", "roleDescription" })
+@ToString(of = { "id", "roleDescription", "roleName" })
 public class Role implements Serializable {
 
 	private static final long serialVersionUID = -7683680631875730954L;
@@ -39,15 +39,9 @@ public class Role implements Serializable {
 
 	@Column(name = "role_name")
 	private String roleName;
-
-	// bi-directional many-to-one association to Permission
-	@OneToMany(mappedBy = "role")
-	@Field( type = FieldType.Nested)
-	private List<Permission> permissions;
-
-	// bi-directional many-to-one association to UserRole
-	@OneToMany(mappedBy = "role")
-	@Field( type = FieldType.Nested)
-	private List<UserRole> userRoles;
+	
+	@ManyToMany(mappedBy="roles")
+	@JsonBackReference
+	private List<User> users;
 
 }

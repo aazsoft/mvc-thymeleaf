@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aazsoft.mvc.dao.UserRepository;
+import com.aazsoft.mvc.domain.entity.Role;
 import com.aazsoft.mvc.domain.entity.User;
-import com.aazsoft.mvc.domain.entity.UserRole;
 import com.aazsoft.mvc.domain.forms.UserCreateForm;
 import com.aazsoft.mvc.service.UserService;
 
@@ -49,12 +49,12 @@ public class UserServiceImpl implements UserService {
 		user.setUsername(form.getUsername());
 		user.setEmail(form.getEmail());
 		user.setPasswordHash(form.getPasswordHash());
-		user.setUserRoles(buildUserRoles(form.getRoles()));
+		user.setRoles(buildUserRoles(form.getRoles()));
 		user.setAge(form.getAge());
 		return userRepository.save(user);
 	}
 
-	private List<UserRole> buildUserRoles(List<Integer> roles) {
+	private List<Role> buildUserRoles(List<Integer> roles) {
 		// build user roles
 		return null;
 	}
