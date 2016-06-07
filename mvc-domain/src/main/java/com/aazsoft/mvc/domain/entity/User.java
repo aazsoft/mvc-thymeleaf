@@ -23,9 +23,6 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Entity
 @Table(name = "User")
 @NamedQueries(value = {
@@ -68,10 +65,8 @@ public class User implements Serializable {
 			}
 		)
 	@Field(type = FieldType.Nested)
-	@JsonManagedReference
 	private List<Role> roles;
 
-	@JsonIgnore
 	public String getRolesStr() {
 		return getRoles().stream()
 				.map(r -> r.getRoleName())

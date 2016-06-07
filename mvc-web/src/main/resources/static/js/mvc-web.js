@@ -95,7 +95,7 @@ function buildUserListTable(data) {
 		bodyHtml += "<td>" + item.id + "</td>";
 		bodyHtml += "<td>" + item.username + "</td>";
 		bodyHtml += "<td><a href='" + "/user/" + item.id + "'>" + item.email + "</a></td>";
-		bodyHtml += "<td>" + item.roles + "</td>";
+		bodyHtml += "<td>" + item.rolesStr + "</td>";
 		bodyHtml += "<td>" + item.age + "</td>";
 		bodyHtml += "</tr>";
     });

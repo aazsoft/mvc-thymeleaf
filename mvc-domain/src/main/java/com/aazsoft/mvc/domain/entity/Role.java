@@ -17,7 +17,7 @@ import lombok.ToString;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "role")
@@ -41,7 +41,7 @@ public class Role implements Serializable {
 	private String roleName;
 	
 	@ManyToMany(mappedBy="roles")
-	@JsonBackReference
+	@JsonIgnore
 	private List<User> users;
 
 }
