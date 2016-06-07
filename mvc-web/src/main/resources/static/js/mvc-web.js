@@ -45,7 +45,12 @@ $(document).ready(function() {
 		var userSearchForm = {};
 		userSearchForm["username"] = $("#userSearchForm input[id=username]").val();
 		userSearchForm["email"] = $("#userSearchForm input[id=email]").val();
-		userSearchForm["role"] = $("#userSearchForm select[id=role]").val();
+		var checked = [];
+        $("input[name='roles[]']:checked").each(function ()
+        {
+            checked.push(parseInt($(this).val()));
+        });
+		userSearchForm["roles"] = checked;
 		userSearchForm["age"] = $("#userSearchForm input[id=age]").val();
 		console.log("userSearchForm=" + userSearchForm);
 		$.ajax({

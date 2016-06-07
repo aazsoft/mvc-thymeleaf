@@ -3,6 +3,7 @@ package com.aazsoft.mvc.security.model;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.security.core.authority.AuthorityUtils;
 
 import com.aazsoft.mvc.domain.entity.Role;
@@ -37,5 +38,9 @@ public class CurrentUser extends
 	@Override
 	public String toString() {
 		return "CurrentUser{" + "user=" + user + "} " + super.toString();
+	}
+	
+	public boolean hasADMINRole() {
+		return getRoles().stream().anyMatch(r -> StringUtils.equalsIgnoreCase("ADMIN", r.getRoleName()));
 	}
 }

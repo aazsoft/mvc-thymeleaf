@@ -2,7 +2,6 @@ CREATE TABLE `mvc`.`user` (
   `id` FLOAT NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(45) NOT NULL,
   `password_hash` VARCHAR(150) NOT NULL,
-  `role` VARCHAR(10) NOT NULL,
   `age` INT not null,
   `username` VARCHAR(45) NOT NULL UNIQUE,
   PRIMARY KEY (`id`),

@@ -1,14 +1,17 @@
 package com.aazsoft.mvc.service.impl;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.aazsoft.mvc.dao.RoleRepository;
 import com.aazsoft.mvc.dao.UserRepository;
 import com.aazsoft.mvc.domain.entity.Role;
 import com.aazsoft.mvc.domain.entity.User;
@@ -23,6 +26,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private RoleRepository roleRepo;
 
 	@Override
 	public Optional<User> getUserById(long id) {
@@ -49,14 +55,13 @@ public class UserServiceImpl implements UserService {
 		user.setUsername(form.getUsername());
 		user.setEmail(form.getEmail());
 		user.setPasswordHash(form.getPasswordHash());
-		user.setRoles(buildUserRoles(form.getRoles()));
+		user.setRoles(CollectionUtils.isEmpty(form.getRoles())? Collections.emptyList() : buildUserRoles(form.getRoles()));
 		user.setAge(form.getAge());
 		return userRepository.save(user);
 	}
 
 	private List<Role> buildUserRoles(List<Integer> roles) {
-		// build user roles
-		return null;
+		return roleRepo.findByIdIn(roles);
 	}
 
 	@Override

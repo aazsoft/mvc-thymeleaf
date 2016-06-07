@@ -1,10 +1,12 @@
 package com.aazsoft.mvc.elasticsearch.service;
 
 import static org.elasticsearch.index.query.FilterBuilders.*;
+import static org.elasticsearch.index.query.QueryBuilders.*;
 
 import java.util.List;
 import java.util.Objects;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.elasticsearch.index.query.AndFilterBuilder;
 import org.elasticsearch.index.query.FilterBuilders;
@@ -34,7 +36,7 @@ public class UserSearchServiceImpl implements UserSearchService {
 
 	@Override
 	public Page<User> searchUsers(final UserSearchForm searchForm, final Pageable pageable) {
-		final NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder().withFilter(matchAllFilter());
+		final NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder().withQuery(matchAllQuery());
 		final AndFilterBuilder andFilterBuilder = FilterBuilders.andFilter();
 		if (!StringUtils.isBlank(searchForm.getUsername())) {
 			andFilterBuilder.add(regexpFilter("username", ".*" + searchForm.getUsername() + ".*"));
@@ -43,15 +45,15 @@ public class UserSearchServiceImpl implements UserSearchService {
 			andFilterBuilder.add(termFilter("email", searchForm.getEmail()));
 		}
 
-		if (!StringUtils.isBlank(searchForm.getRole())) {
-			andFilterBuilder.add(termFilter("role.name", searchForm.getRole()));
+		if (!CollectionUtils.isEmpty(searchForm.getRoles())) {
+			andFilterBuilder.add(nestedFilter("roles", boolFilter().must(termsFilter("roles.id", 
+					searchForm.getRoles().toArray(new Object[]{})))));
 		}
 
 		if (!Objects.isNull(searchForm.getAge())) {
 			andFilterBuilder.add(rangeFilter("age").gte(searchForm.getAge()));
 		}
 		final SearchQuery searchQuery = queryBuilder.withFilter(andFilterBuilder).withPageable(pageable).build();
-
 		return userESRepo.search(searchQuery);
 	}
 	

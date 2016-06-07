@@ -42,10 +42,14 @@
 				</div>
 				<div class="control-group">
 					<label class="control-label" for="role" th:text="#{userCreateForm.role.label}">(Role)</label> 
-					<select class="form-control" name="role" id="role" required="required">
+					<div th:each="role :  ${roles}">
+						<input id="roles" name="roles" type="checkbox" th:value="${role.id}" style="margin-left: 30px;"/>
+					    <label th:text="${role.roleName} + '&nbsp;(' + ${role.roleDescription} + ')'">(roleName)</label>
+					</div>
+					<!-- <select class="form-control" name="role" id="role" required="required">
 						<option>USER</option>
 						<option>ADMIN</option>
-					</select>
+					</select> -->
 				</div>
 				<input type="submit" class="btn btn-lg btn-success btn-block" th:value="#{userCreateForm.button.save}" />
 				

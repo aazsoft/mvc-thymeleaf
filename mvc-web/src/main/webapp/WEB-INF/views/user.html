@@ -11,8 +11,8 @@
 		Logged user: <span th:text="${user.email}">user</span>
 		<br />Username: <span th:text="${user.username}">(Username)</span>
 		<br />Roles: 
-		<ul th:each="role :  ${user.userRoles}">
-			<li th:text="${role.role.roleName}">(role name)</li>
+		<ul th:each="role :  ${user.roles}">
+			<li th:text="${role.roleName}">(role name)</li>
 		</ul>
 		<br />Age: <span th:text="${user.age}">(Age)</span>
 	</div>

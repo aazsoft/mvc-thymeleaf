@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.aazsoft.mvc.domain.forms.UserCreateForm;
 import com.aazsoft.mvc.domain.forms.UserSearchForm;
+import com.aazsoft.mvc.service.RoleService;
 import com.aazsoft.mvc.service.UserService;
 
 @Controller
@@ -30,11 +31,16 @@ public class AdminController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private RoleService roleService;
+	
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/user/create", method = RequestMethod.GET)
-	public ModelAndView getUserCreatePage() {
+	public ModelAndView getUserCreatePage(Map<String, Object> model) {
 		LOG.debug("Getting user create form");
-		return new ModelAndView("userCreation", "userCreateForm", new UserCreateForm());
+		model.put("userCreateForm", new UserCreateForm());
+		model.put("roles", roleService.getAllRoles());
+		return new ModelAndView("userCreation", model);
 	}
 
 	@PreAuthorize("hasAuthority('ADMIN')")
@@ -75,6 +81,7 @@ public class AdminController {
 	public ModelAndView initializeSearchPage(Map<String, Object> model) {
 		LOG.debug("Getting user search form");
 		model.put("userSearchForm", new UserSearchForm());
+		model.put("roles", roleService.getAllRoles());
 		return new ModelAndView("searchUsers", model);
 	}
 	
