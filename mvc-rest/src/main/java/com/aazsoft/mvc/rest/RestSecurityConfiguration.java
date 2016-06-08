@@ -11,7 +11,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +20,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -28,20 +28,26 @@ public class RestSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		// TODO: configure the security for the RESTs later
-		http.csrf().disable().authorizeRequests().anyRequest().permitAll();
+		http.csrf().disable().authorizeRequests().anyRequest().authenticated()
+			.and()
+			.httpBasic()
+			.and()
+			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 	}
 
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.inMemoryAuthentication()
+		.withUser("u").password("u").authorities("USER")
+		.and()
+		.withUser("a").password("a").authorities("ADMIN");
 	}
 
 	@Bean
-	FilterRegistrationBean corsFilter(
-			@Value("${tagit.origin:http://localhost:8090}") String origin) {
+	FilterRegistrationBean corsFilter() {
 		return new FilterRegistrationBean(new Filter() {
-			public void doFilter(ServletRequest req, ServletResponse res,
-					FilterChain chain) throws IOException, ServletException {
+			public void doFilter(final ServletRequest req, final ServletResponse res, final FilterChain chain) 
+					throws IOException, ServletException {
 				HttpServletRequest request = (HttpServletRequest) req;
 				request.setAttribute("Accept", MediaType.APPLICATION_JSON_VALUE);
 				request.setAttribute("Content-Type", MediaType.APPLICATION_JSON_VALUE);
