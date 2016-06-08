@@ -17,21 +17,15 @@ CREATE TABLE `role` (
 );
 
 
-CREATE TABLE `mvc`.`user_role` (
-  `user_id` FLOAT NOT NULL,
-  `role_id` INT NOT NULL,
-  PRIMARY KEY (`user_id`, `role_id`),
-  INDEX `FK_role_id_idx` (`role_id` ASC),
-  CONSTRAINT `FK_user_id`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `mvc`.`user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `FK_role_id`
-    FOREIGN KEY (`role_id`)
-    REFERENCES `mvc`.`role` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+CREATE TABLE `user_role` (
+  `user_id` float NOT NULL,
+  `role_id` int(11) NOT NULL,
+  PRIMARY KEY (`user_id`,`role_id`),
+  KEY `FK_role_id_idx` (`role_id`),
+  CONSTRAINT `FK_role_id` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+
   
   
 INSERT INTO `mvc`.`user` (`id`, `email`, `password_hash`, `role`, `age`, `username`) VALUES 
