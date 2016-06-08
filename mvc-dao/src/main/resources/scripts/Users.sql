@@ -8,7 +8,7 @@ CREATE TABLE `mvc`.`user` (
   UNIQUE INDEX `id_UNIQUE` (`id` ASC),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC));
 
-CREATE TABLE `role` (
+CREATE TABLE `mvc`.`role` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `role_name` varchar(50) NOT NULL,
   `role_description` varchar(100) NOT NULL,
@@ -17,7 +17,7 @@ CREATE TABLE `role` (
 );
 
 
-CREATE TABLE `user_role` (
+CREATE TABLE `mvc`.`user_role` (
   `user_id` float NOT NULL,
   `role_id` int(11) NOT NULL,
   PRIMARY KEY (`user_id`,`role_id`),
@@ -29,9 +29,9 @@ CREATE TABLE `user_role` (
   
   
 INSERT INTO `mvc`.`user` (`id`, `email`, `password_hash`, `role`, `age`, `username`) VALUES 
-('1', 'ad@gmail.com', '$2a$10$YFRa6Tlk9I4mmjSpDVRjwOS1wcWwXexxfQFBrDphusbTQK/966GZ6', 'ADMIN', 45, 'admin');
+('1', 'ad@gmail.com', '$2a$10$YFRa6Tlk9I4mmjSpDVRjwOS1wcWwXexxfQFBrDphusbTQK/966GZ6', 45, 'admin');
 INSERT INTO `mvc`.`user` (`id`, `email`, `password_hash`, `role`, `age`, `username`) VALUES 
-('2', 't@gmail.com', '$2a$10$YFRa6Tlk9I4mmjSpDVRjwOS1wcWwXexxfQFBrDphusbTQK/966GZ6', 'USER', 30, 'truong');  
+('2', 't@gmail.com', '$2a$10$YFRa6Tlk9I4mmjSpDVRjwOS1wcWwXexxfQFBrDphusbTQK/966GZ6', 30, 'truong');  
 
 INSERT INTO `mvc`.`role` (`id`, `role_name`, `role_description`) VALUES ('1', 'ADMIN', 'adminstrator');
 INSERT INTO `mvc`.`role` (`id`, `role_name`, `role_description`) VALUES ('2', 'USER', 'user');
