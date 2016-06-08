@@ -28,18 +28,18 @@ CREATE TABLE `mvc`.`user_role` (
 
   
   
-INSERT INTO `mvc`.`user` (`id`, `email`, `password_hash`, `role`, `age`, `username`) VALUES 
+INSERT INTO `mvc`.`user` (`id`, `email`, `password_hash`, `age`, `username`) VALUES 
 ('1', 'ad@gmail.com', '$2a$10$YFRa6Tlk9I4mmjSpDVRjwOS1wcWwXexxfQFBrDphusbTQK/966GZ6', 45, 'admin');
-INSERT INTO `mvc`.`user` (`id`, `email`, `password_hash`, `role`, `age`, `username`) VALUES 
-('2', 't@gmail.com', '$2a$10$YFRa6Tlk9I4mmjSpDVRjwOS1wcWwXexxfQFBrDphusbTQK/966GZ6', 30, 'truong');  
+INSERT INTO `mvc`.`user` (`id`, `email`, `password_hash`, `age`, `username`) VALUES 
+('2', 't@gmail.com', '$2a$10$YFRa6Tlk9I4mmjSpDVRjwOS1wcWwXexxfQFBrDphusbTQK/966GZ6', 30, 'truong'); 
+commit; 
 
 INSERT INTO `mvc`.`role` (`id`, `role_name`, `role_description`) VALUES ('1', 'ADMIN', 'adminstrator');
 INSERT INTO `mvc`.`role` (`id`, `role_name`, `role_description`) VALUES ('2', 'USER', 'user');
 INSERT INTO `mvc`.`role` (`id`, `role_name`, `role_description`) VALUES ('3', 'POWER_USER', 'power user');
-
+commit;
 INSERT INTO `mvc`.`user_role` (`user_id`, `role_id`) VALUES ('1', '1');
 INSERT INTO `mvc`.`user_role` (`user_id`, `role_id`) VALUES ('2', '2');
-INSERT INTO `mvc`.`user_role` (`user_id`, `role_id`) VALUES ('3', '2');
-INSERT INTO `mvc`.`user_role` (`user_id`, `role_id`) VALUES ('4', '2');
-INSERT INTO `mvc`.`user_role` (`user_id`, `role_id`) VALUES ('5', '2');
+INSERT INTO `mvc`.`user_role` (`user_id`, `role_id`) VALUES ('2', '3');
+commit;
 
