@@ -14,16 +14,12 @@ import com.aazsoft.mvc.service.UserService;
 
 @Service
 @Transactional
-public class CurrentUserDetailsService implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CurrentUserDetailsService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
     
-    private final UserService userService;
-
     @Autowired
-    public CurrentUserDetailsService(UserService userService) {
-        this.userService = userService;
-    }
+    private UserService userService;
 
     @Override
     public CurrentUser loadUserByUsername(String email) throws UsernameNotFoundException {

@@ -35,7 +35,7 @@ public class UserRestController {
 	
 	@Autowired
 	private UserSearchService esSearchService;
-
+	
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	public List<User> searchUser() {
 		LOG.debug("Searching user...");
@@ -86,7 +86,21 @@ public class UserRestController {
 			method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Page<User> esSearchUsers(@RequestBody final UserSearchForm userSearchForm) {
 		LOG.debug("Search users by userSearchForm={}", userSearchForm);
-		Page<User> users = esSearchService.searchUsers(userSearchForm, new PageRequest(0, 10));
+		Page<User> users = esSearchService.searchUsers(userSearchForm, new PageRequest(0, 5000));
 		return users;
 	}
+	
+	@RequestMapping(value = "/bulkInsert", 
+			method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public String bulkInsert() {
+		LOG.debug("Bulk insert {} users to DB", "1.5M");
+		try {
+			userService.bulkInsert(50000); // performance with 1.5M data!
+			LOG.debug("Bulk insert {} users successful", "1.5M");
+		} catch (final Exception ex) {
+			return "{\"message\": \"Bulk insert users to DB error!\"}";
+		}
+		return "{\"message\": \"Bulk insert 1.5M users to DB successfully!\"}";
+	}
+	
 }

@@ -9,7 +9,7 @@ import com.aazsoft.mvc.security.model.CurrentUser;
 @Service
 public class CurrentUserServiceImpl implements CurrentUserService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CurrentUserDetailsService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
 
     @Override
     public boolean canAccessUser(CurrentUser currentUser, Long userId) {

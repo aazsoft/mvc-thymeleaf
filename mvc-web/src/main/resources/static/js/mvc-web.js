@@ -90,6 +90,26 @@ $(document).ready(function() {
 		event.preventDefault();
 	});
 	
+	$("#btnBulkInsert").click(function (event) {
+		if (!confirm("Are you sure to Bulk insert 1.5M users to DB?")) {
+			return;
+		}
+		console.log("Bulk insert data to DB...");
+		$.ajax({
+			type : 'POST',
+			url : 'http://localhost:9000/user/bulkInsert',
+			dataType : 'json',
+			success : function(data) {
+				alert(data.message);
+			},
+			error: function (xhr, error) {
+				console.log(error);
+				alert("Bulk insert data to DB error! Please see error log.");
+			}
+		});
+		event.preventDefault();
+	});
+	
 });
 
 function buildUserListTable(data) {
@@ -105,6 +125,11 @@ function buildUserListTable(data) {
     });
 	console.log(bodyHtml);
 	$("#tbUserListBody").html(bodyHtml);
+}
+
+function buildPaginationBody(pageable) {
+	var paginationBodyHtml = '';
+	$("#paginationBody").html(paginationBodyHtml);
 }
 
 function confirmDeletion() {

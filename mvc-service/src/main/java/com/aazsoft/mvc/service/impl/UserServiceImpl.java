@@ -1,14 +1,16 @@
 package com.aazsoft.mvc.service.impl;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -47,7 +49,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> getAllUsers() {
 		LOGGER.debug("Getting all users");
-		return userRepository.findAll(new Sort("email"));
+		return userRepository.findAll();
 	}
 
 	@Override
@@ -71,4 +73,22 @@ public class UserServiceImpl implements UserService {
 		userRepository.delete(id);
 	}
 
+	@Override
+	public void bulkInsert(int d) {
+		List<User> users = IntStream.range(0, d).boxed()
+				.map(i -> createUser(i)).collect(Collectors.toList());
+		users.stream().forEach(u -> {
+			userRepository.save(u);
+		});
+	}
+
+	private User createUser(final int i) {
+		User u = new User();
+		u.setAge((int) (99 * Math.random()));
+		u.setEmail("t" + i + "@g.com");
+		u.setPasswordHash("$2a$10$YFRa6Tlk9I4mmjSpDVRjwOS1wcWwXexxfQFBrDphusbTQK/966GZ6");
+		u.setUsername("t" + i);
+		u.setRoles(roleRepo.findByIdIn(Arrays.asList(3, 2)));
+		return u;
+	}
 }

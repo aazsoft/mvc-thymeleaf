@@ -36,6 +36,7 @@
 				<input type="button" id="btnUserIndex" class="btn btn-lg btn-primary btn-block" th:value="#{userSearchForm.button.index}" />
 				<input type="button" id="btnUserElasticSearch" class="btn btn-lg btn-info btn-block" th:value="#{userSearchForm.button.essearch}" />
 				<input type="button" id="btnElasticSearchClearIndices" class="btn btn-lg btn-warning btn-block" th:value="#{userSearchForm.button.esClearIndices}" />
+				<input type="button" id="btnBulkInsert" class="btn btn-lg btn-success btn-block" th:value="#{userSearchForm.button.bulkInsert}"/>
 				
 			</fieldset>
 		</form>
@@ -52,6 +53,7 @@
 			</thead>
 			<tbody id="tbUserListBody"></tbody>
 		</table>
+		<div id="paginationBody"></div>
 
 	</div>
 

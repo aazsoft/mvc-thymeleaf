@@ -18,4 +18,6 @@ public interface UserService {
 
 	void deleteUser(Long id);
 
+	void bulkInsert(int d);
+
 }

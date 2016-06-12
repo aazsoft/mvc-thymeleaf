@@ -29,5 +29,5 @@ public class UserIndexServiceImpl implements UserIndexService {
 	public void clearAllIndices() {
 		userESRepo.deleteAll();
 	}
-
+	
 }
