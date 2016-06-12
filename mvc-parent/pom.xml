@@ -21,6 +21,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jquery.version>2.2.3</jquery.version>
 		<bootstrap.version>3.3.6</bootstrap.version>
+		<lombok.version>1.16.8</lombok.version>
 	</properties>
 
 	<modules>

@@ -7,7 +7,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
-import com.aazsoft.mvc.config.MvcMysqlConfiguration;
 import com.aazsoft.mvc.security.config.SecurityConfiguration;
 import com.aazsoft.mvc.web.config.MvcConfiguration;
 
@@ -15,7 +14,7 @@ import com.aazsoft.mvc.web.config.MvcConfiguration;
 @Configuration
 @ComponentScan(value = "com.aazsoft.mvc")
 @EnableAutoConfiguration
-@Import(value = { MvcConfiguration.class, SecurityConfiguration.class, MvcMysqlConfiguration.class })
+@Import(value = { MvcConfiguration.class, SecurityConfiguration.class })
 public class MvcApplication {
 
 	public static void main(String[] args) {

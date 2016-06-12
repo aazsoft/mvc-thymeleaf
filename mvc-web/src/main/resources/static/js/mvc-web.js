@@ -9,7 +9,6 @@ $(document).ready(function() {
 		$.ajax({
 			type : 'POST',
 			url : 'http://localhost:9000/user/search',
-			//data : userSearchForm,
 			dataType : 'json',
 			success : function(data) {
 				$("#titleUserList").html("Users List from DB");
